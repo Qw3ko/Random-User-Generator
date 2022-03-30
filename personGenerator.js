@@ -226,7 +226,6 @@ const personGenerator = {
         }
         if (day <= 30) {
             switch (day <= 30) {
-                case "Февраля":
                 case "Апреля":
                 case "Июня":
                 case "Сентября":
