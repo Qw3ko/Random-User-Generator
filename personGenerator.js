@@ -138,7 +138,7 @@ const personGenerator = {
     },
 
 
-    nameToMiddleName: function (name) {
+    nameToMiddleName: function (name) { // Генерация отчества
         if (this.person.gender === this.GENDER_MALE) {
             switch (name) {
                 case "Александр":
@@ -199,18 +199,37 @@ const personGenerator = {
     },
 
 
-    randomMiddleName: function () {
+    randomMiddleName: function () { // Генерация отчества
         let middleName = this.randomValue(this.firstNameMaleJson);
         return this.nameToMiddleName(middleName);
     },
 
 
-    birth: function() { // Генерация даты рождения
-        max_1 = 28;
-        min_1 = 1;
-        max_2 = 1999;
-        min_2 = 1970;
-        day = Math.floor(Math.random() * (max_1 - min_1 + 1) + min_1);
+    birth: function (month) { // Генерация даты рождения
+        let day = this.randomIntNumber2();
+        if (day <= 31 ) {
+            switch (month) {
+                case "Января":
+                case "Марта":
+                case "Мая":
+                case "Июля":
+                case "Августа":
+                case "Октября":
+                case "Декабря":
+                    return day;
+            }
+        } else {
+            switch (day <= 30 || 28) {
+                case "Февраля":
+                case "Апреля":
+                case "Июня":
+                case "Сентября":
+                case "Ноября":
+                    return day;
+            }
+        }
+        max_2 = 1970;
+        min_2 = 1999; 
         year = Math.floor(Math.random() * (max_2 - min_2 + 1) + min_2);
         return day + " " + this.randomValue(this.month) + " " + year;
     },
