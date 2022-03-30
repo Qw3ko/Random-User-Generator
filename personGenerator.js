@@ -116,25 +116,25 @@ const personGenerator = {
         gender = this.randomIntNumber(1, 0) === 0 ? this.GENDER_MALE : this.GENDER_FEMALE;
         return gender;
     },
-    
-    
-    randomFirstName: function() { // Генерация имени
-        
+
+
+    randomFirstName: function () { // Генерация имени
+
         if (this.person.gender === this.GENDER_MALE) {
             return this.randomValue(this.firstNameMaleJson);
         } else {
-            return this.randomValue(this.firstNameFemaleJson); 
-        } 
+            return this.randomValue(this.firstNameFemaleJson);
+        }
     },
 
-    
-    randomSurname: function() { // Генерация фамилии
-        
+
+    randomSurname: function () { // Генерация фамилии
+
         if (this.person.gender === this.GENDER_MALE) {
             return this.randomValue(this.surnameJson);
         } else {
             return this.randomValue(this.surnameJson) + "а";
-        } 
+        }
     },
 
 
@@ -207,7 +207,7 @@ const personGenerator = {
 
     birth: function (month) { // Генерация даты рождения
         let day = this.randomIntNumber2();
-        if (day <= 31 ) {
+        if (day <= 31) {
             switch (month) {
                 case "Января":
                 case "Марта":
@@ -218,8 +218,14 @@ const personGenerator = {
                 case "Декабря":
                     return day;
             }
-        } else {
-            switch (day <= 30 || 28) {
+        } else if (day <= 28) {
+            switch (month) {
+                case "Февраля":
+                    return day;
+            }
+        }
+        if (day <= 30) {
+            switch (day <= 30) {
                 case "Февраля":
                 case "Апреля":
                 case "Июня":
@@ -227,23 +233,22 @@ const personGenerator = {
                 case "Ноября":
                     return day;
             }
+            max_2 = 1970;
+            min_2 = 1999;
+            year = Math.floor(Math.random() * (max_2 - min_2 + 1) + min_2);
+            return day + " " + this.randomValue(this.month) + " " + year;
         }
-        max_2 = 1970;
-        min_2 = 1999; 
-        year = Math.floor(Math.random() * (max_2 - min_2 + 1) + min_2);
-        return day + " " + this.randomValue(this.month) + " " + year;
     },
 
+    randomWork: function () { // Генерация работы
 
-    randomWork: function() { // Генерация работы
-        
         return this.randomValue(this.work);
-    
+
     },
 
 
     getPerson: function () { // Составление личности
-        this.person = {}; 
+        this.person = {};
         this.person.gender = this.randomGender();
         this.person.firstName = this.randomFirstName();
         this.person.surname = this.randomSurname();
